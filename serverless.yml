@@ -1,0 +1,14 @@
+service: rss
+
+provider:
+  name: aws
+  runtime: provided.al2
+  architecture: arm64
+  region: eu-west-1
+  deploymentBucket:
+    blockPublicAccess: true
+
+functions:
+  rss:
+    handler: bootstrap
+    url: true
