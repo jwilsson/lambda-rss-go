@@ -18,9 +18,7 @@ func fetch() ([]Article, error) {
 	}
 
 	articleElements := doc.Find("main [role='listitem']")
-	articles := make([]Article, articleElements.Length())
-
-	articleElements.Each(func(i int, s *goquery.Selection) {
+	articles := goquery.Map(articleElements, func(_ int, s *goquery.Selection) Article {
 		dateElement := s.Find("b")
 		linkElement := s.Find("a")
 		typeElement := s.Find("[type]")
@@ -30,7 +28,7 @@ func fetch() ([]Article, error) {
 		postType := strings.Trim(typeElement.Text(), " ")
 		postUrl, _ := url.JoinPath(BASE_URL, linkElement.AttrOr("href", ""))
 
-		articles[i] = Article{
+		return Article{
 			Date:        toRssDateFromFormat(postDate, "F j, Y"),
 			Description: fmt.Sprintf("%s - %s", postType, postTitle),
 			Link:        postUrl,
