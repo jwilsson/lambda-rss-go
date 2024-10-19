@@ -19,7 +19,7 @@ func toRssDateFromFormat(date string, fromFormat string) string {
 }
 
 func fetchSite(url string) (*goquery.Document, error) {
-	res, err := http.Get(BASE_URL)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}

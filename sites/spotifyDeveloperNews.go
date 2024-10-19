@@ -8,11 +8,13 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const BASE_URL = "https://developer.spotify.com/community"
+const BASE_URL = "https://developer.spotify.com"
 const NAME = "Spotify Developer News"
 
 func fetch() ([]Article, error) {
-	doc, err := fetchSite(BASE_URL)
+	siteUrl, _ := url.JoinPath(BASE_URL, "/community")
+	doc, err := fetchSite(siteUrl)
+
 	if err != nil {
 		return nil, err
 	}
