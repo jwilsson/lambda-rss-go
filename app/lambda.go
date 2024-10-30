@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"lambda-rss/sites"
+	"lambda-rss-app/sites"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"

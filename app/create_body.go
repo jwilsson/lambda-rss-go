@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"lambda-rss/sites"
+	"lambda-rss-app/sites"
 
 	_ "embed"
 	"text/template"
