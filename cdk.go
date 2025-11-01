@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/aws/aws-cdk-go/awscdk/v2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
@@ -28,6 +29,11 @@ func NewLambdaRssStack(scope constructs.Construct, id string, props *StackProps)
 	functionUrl := function.AddFunctionUrl(&awslambda.FunctionUrlOptions{
 		AuthType: awslambda.FunctionUrlAuthType_NONE,
 	})
+
+	function.AddPermission(jsii.String("LambdaRssInvokeFunctionPermission"), &awslambda.Permission{
+		Action:    jsii.String("lambda:InvokeFunction"),
+		Principal: awsiam.NewServicePrincipal(jsii.String("lambda.amazonaws.com"), nil),
+	});
 
 	awscdk.NewCfnOutput(stack, jsii.String("lambdaRssFunctionUrlOutput"), &awscdk.CfnOutputProps{
 		Value: functionUrl.Url(),
