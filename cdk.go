@@ -21,7 +21,7 @@ func NewLambdaRssStack(scope constructs.Construct, id string, props *StackProps)
 	stack := awscdk.NewStack(scope, &id, &sprops)
 	function := awslambda.NewFunction(stack, jsii.String("LambdaRssFunction"), &awslambda.FunctionProps{
 		Architecture: awslambda.Architecture_ARM_64(),
-		Runtime:      awslambda.Runtime_PROVIDED_AL2(),
+		Runtime:      awslambda.Runtime_PROVIDED_AL2023(),
 		Handler:      jsii.String("bootstrap"),
 		Code:         awslambda.Code_FromAsset(jsii.String("./app/build/"), nil),
 	})
